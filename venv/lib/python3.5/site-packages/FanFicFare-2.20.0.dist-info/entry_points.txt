@@ -1,0 +1,3 @@
+[console_scripts]
+fanficfare = fanficfare.cli:main
+
