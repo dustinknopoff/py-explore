@@ -3,7 +3,7 @@
 cd ~/Documents/Python3/tutorial
 
 ## declare an array variable
-declare -a arr=("artemisu" "daphneu" "fleuru" "morganau" "riasu")
+declare -a arr=("artemisu" "daphneu" "fleuru" "morganau" "riasu" "artemis" "daphne" "diana" "fleur" "favorites" "morgana" "rias")
 
 ## now loop through the above array
 for i in "${arr[@]}"
