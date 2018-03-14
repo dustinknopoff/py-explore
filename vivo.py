@@ -5,6 +5,9 @@ from bs4 import BeautifulSoup
 
 
 def main():
+    """
+    Adds reminder to Things.app if there is a pair of shoes under $60 in size 10.
+    """
     results = getcontent()
     flag = False
     for result in results:
@@ -18,6 +21,10 @@ def main():
 
 
 def getcontent():
+    """
+    Scrapes VivoBarefoot website for clearance men's shoes
+    :return: list of dictionaries containing product names, prices, and links
+    """
     site = 'https://www.vivobarefoot.com/us/shop/sale#q=gender.Mens'
     r = requests.get(site).content
     soup = BeautifulSoup(r, 'html.parser')
@@ -38,6 +45,11 @@ def getcontent():
 
 
 def getSize(link):
+    """
+    Determines if the clearance shoes' size 10 (US) in stock.
+    :param link: link to a particular shoe
+    :return: true if in stock.
+    """
     r = requests.get(link).content
     soup = BeautifulSoup(r, 'html.parser')
     sizes = soup.find('div', attrs={'class': 'sizes'})

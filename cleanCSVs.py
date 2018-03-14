@@ -1,8 +1,12 @@
-import sys, csv
-import glob, os
+import csv
+import glob
+import os
 
 
 def main():
+    """
+    Strips csv of last 7 lines, splits by 3000 rows and then deletes after 5 minutes.
+    """
     file = str(get_download_path()) + str(getFile())
     with open(file, 'r', encoding='latin_1') as f:
         reader = csv.reader(f)
@@ -34,6 +38,9 @@ def main():
 
 
 def getFile():
+    """
+    :return: all csv files in the Downloads folder.
+    """
     os.chdir(get_download_path())
     for file in glob.glob("*.csv"):
         return file

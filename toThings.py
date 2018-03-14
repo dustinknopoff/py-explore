@@ -1,7 +1,6 @@
-import requests
 import re
-import unicodedata
 import webbrowser
+
 import appex
 
 
@@ -24,6 +23,9 @@ import appex
 # - lire (Full-text RSS) $6.99 [Check it out](https://itunes.apple.com/us/app/lire-full-text-rss/id550441545?mt=8&uo=4)
 # - iCab Mobile (Web Browser) $1.99 [Check it out](https://itunes.apple.com/us/app/icab-mobile-web-browser/id308111628?mt=8&uo=4)"""
 def main():
+    """
+    Converts Bear.app note into a a series of Things.app reminders. (For Pythonista)
+    """
     text = appex.get_text()
     if not text:
         print(
