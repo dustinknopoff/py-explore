@@ -1,7 +1,8 @@
 import re
 import webbrowser
 
-import appex
+
+# import appex
 
 
 # For Testing
@@ -18,7 +19,7 @@ import appex
 # - Affinity Designer for Mac $49.99 [Check it out](https://itunes.apple.com/us/app/affinity-designer/id824171161?mt=12)
 # - Kaleidoscope 2 $19.99 [Check it out](https://itunes.apple.com/us/app/kaleidoscope-2/id1273771160?mt=8&uo=4)
 # - Dash $24.99 [Check it out](https://kapeli.onfastspring.com/dash) (50% off for students)
-# - Alfred (Powerpack) ￡35 [Check it out](https://www.alfredapp.com/powerpack/) ($50)
+# - Alfred (Powerpack) pounds 35 [Check it out](https://www.alfredapp.com/powerpack/) ($50)
 # + FileBrowser - Computers+Cloud $5.99 [Check it out](https://itunes.apple.com/us/app/filebrowser-computers-cloud/id364738545?mt=8&uo=4)
 # - lire (Full-text RSS) $6.99 [Check it out](https://itunes.apple.com/us/app/lire-full-text-rss/id550441545?mt=8&uo=4)
 # - iCab Mobile (Web Browser) $1.99 [Check it out](https://itunes.apple.com/us/app/icab-mobile-web-browser/id308111628?mt=8&uo=4)"""
