@@ -1,14 +1,26 @@
 import csv
 import glob
 import os
+import subprocess
+import time
 
 
 def main():
     """
+    Cleans csv file if found.
+    """
+    try:
+        clean()
+    except IOError:
+        print("Downloads folder does not contain a .csv file.")
+
+
+def clean():
+    """
     Strips csv of last 7 lines, splits by 3000 rows and then deletes after 5 minutes.
     """
     file = str(get_download_path()) + str(getFile())
-    with open(file, 'r', encoding='latin_1') as f:
+    with open(file, 'r') as f:
         reader = csv.reader(f)
         counter = 0
         rows = []
@@ -20,21 +32,32 @@ def main():
             counter += 1
         rows = rows[:-7]
         if counter <= 3000:
-            with open(str(get_download_path()) + 'out.csv', 'w+', encoding='latin_1') as fout:
+            with open(str(get_download_path()) + 'out.csv', 'w+') as fout:
                 writer = csv.writer(fout)
+                writer.writerow(header)
                 for row in rows:
                     writer.writerow(row)
         else:
-            fn = lambda A, n: [A[i:i + n] for i in range(0, len(A), n)]
+            fn = lambda A, n: [A[i:i + n] for i in xrange(0, len(A), n)]
             arrays = fn(rows, 3000)
             count = 1
             for array in arrays:
-                with open(str(get_download_path()) + 'out' + str(count) + '.csv', 'w+', encoding='latin_1') as fwrite:
+                with open(str(get_download_path()) + 'out' + str(count) + '.csv', 'w+') as fwrite:
                     writer = csv.writer(fwrite)
                     writer.writerow(header)
                     for row in array:
                         writer.writerow(row)
                     count += 1
+        print('Your report has been reformatted for dataloader uploading.')
+        cmd = "cd " + get_download_path()
+        opn = "open ."
+        subprocess.Popen(cmd.split())
+        subprocess.Popen(opn.split())
+        time.sleep(300)
+        os.chdir(get_download_path())
+        for file in glob.glob("*.csv"):
+            os.remove(file)
+        print("Files have been removed from your Downloads Folder.")
 
 
 def getFile():
