@@ -2,6 +2,7 @@ import csv
 import glob
 import os
 import subprocess
+import sys
 import time
 
 
@@ -10,12 +11,12 @@ def main():
     Cleans csv file if found.
     """
     try:
-        clean()
+        clean(sys.argv[1], sys.argv[2], sys.argv[3])
     except IOError:
         print("Downloads folder does not contain a .csv file.")
 
 
-def clean():
+def clean(last, length, delete):
     """
     Strips csv of last 7 lines, splits by 3000 rows and then deletes after 5 minutes.
     """
@@ -30,15 +31,15 @@ def clean():
             else:
                 rows.append(row)
             counter += 1
-        rows = rows[:-7]
-        if counter <= 3000:
+        rows = rows[:-last]
+        if counter <= length:
             with open(str(get_download_path()) + 'out.csv', 'w+') as fout:
                 writer = csv.writer(fout)
                 writer.writerow(header)
                 for row in rows:
                     writer.writerow(row)
         else:
-            fn = lambda A, n: [A[i:i + n] for i in xrange(0, len(A), n)]
+            fn = lambda A, n: [A[i:i + n] for i in range(0, len(A), n)]
             arrays = fn(rows, 3000)
             count = 1
             for array in arrays:
@@ -53,11 +54,12 @@ def clean():
         opn = "open ."
         subprocess.Popen(cmd.split())
         subprocess.Popen(opn.split())
-        time.sleep(300)
-        os.chdir(get_download_path())
-        for file in glob.glob("*.csv"):
-            os.remove(file)
-        print("Files have been removed from your Downloads Folder.")
+        if 'y' in delete:
+            time.sleep(300)
+            os.chdir(get_download_path())
+            for file in glob.glob("*.csv"):
+                os.remove(file)
+            print("Files have been removed from your Downloads Folder.")
 
 
 def getFile():
