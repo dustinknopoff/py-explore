@@ -11,7 +11,7 @@ def main():
     Cleans csv file if found.
     """
     try:
-        clean(sys.argv[1], sys.argv[2], sys.argv[3])
+        clean(7, 3000, 'y')
     except IOError:
         print("Downloads folder does not contain a .csv file.")
 
@@ -39,7 +39,7 @@ def clean(last, length, delete):
                 for row in rows:
                     writer.writerow(row)
         else:
-            fn = lambda A, n: [A[i:i + n] for i in range(0, len(A), n)]
+            def fn(A, n): return [A[i:i + n] for i in range(0, len(A), n)]
             arrays = fn(rows, 3000)
             count = 1
             for array in arrays:
