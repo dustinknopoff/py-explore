@@ -40,7 +40,6 @@ def getcontent():
                 d['Link'] = 'https://www.vivobarefoot.com' + li.a.get('href')
                 price = li.find('span', attrs={'class', 'sale'}).get_text()
                 d['Price'] = price
-                print(d)
                 results.append(d)
     return results
 
