@@ -1,12 +1,25 @@
 import os
 import requests
+import subprocess
+import re
 
-request = requests.get("https://api.github.com/repos/dustinknopoff/py-explore/issues",
-                       headers={'Authorization': 'token '})  # enter token
+out = subprocess.Popen("git remote show origin".split(),
+                       stdout=subprocess.PIPE).communicate()[0]
+out = str(out.decode('utf8'))
+prt = re.findall(r'https://.*', out)
+repo = os.path.basename(prt[0])
+repo = repo[:-4]
+# extract repository name from this folder
+request = requests.get("https://api.github.com/repos/dustinknopoff/{}/issues".format(repo),
+                       headers={'Authorization': 'token f155ab9dfbf99458f16e6210a182af8b6260be2a'})
+# get all issues related to this repository
 string = ""
 for issue in request.json():
-    string += "TODO: {}\n{}\n{}\n".format(issue['title'], issue['html_url'], issue['body'])
+    # Generate formatted string for use
+    string += "TODO: {}\n{}\n{}\n".format(
+        issue['title'], issue['html_url'], issue['body'])
 if string != "":
+    # create txt file holding all templates
     with open(os.getcwd() + "/issues.txt", 'w+', encoding='utf8') as f:
         f.write(string)
 else:
