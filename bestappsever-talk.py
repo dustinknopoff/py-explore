@@ -1,8 +1,9 @@
+#!/usr/bin/env python3.5
 from collections import Counter
 
 import nltk
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup\
 
 
 # def isApp(word):
@@ -33,7 +34,8 @@ def tokenize(alltext):
     counter = Counter(w.lower() for w in alltext.replace('.', '').replace(',', '').replace("'", "").split()
                       if w not in stopwords and len(w) > 5)
     # print(counter.most_common(40))
-    all_word_except_stop_dist = nltk.FreqDist(w.lower() for w in all_word_dist if w not in stopwords and len(w) > 5)
+    all_word_except_stop_dist = nltk.FreqDist(
+        w.lower() for w in all_word_dist if w not in stopwords and len(w) > 5)
     most_common = all_word_except_stop_dist.most_common(40)
     return counter.most_common(100)
 
