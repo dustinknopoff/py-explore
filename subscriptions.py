@@ -143,3 +143,14 @@ if __name__ == '__main__':
     else:
         print("Please enter a valid argument.")
     subscriptions.save()
+    
+#     Usage:
+# usage: subscriptions.py [-h] [-a] [-d] [-p]
+
+# A quick, easy subscription tracker for the terminal.
+
+# optional arguments:
+#   -h, --help    show this help message and exit
+#   -a, --add     Add a subscription.
+#   -d, --delete  Deletes a subscription
+#   -p, --print   Prints all subscriptions.
