@@ -2,6 +2,15 @@ import json
 from typing import List, Dict, Any
 import argparse
 
+# Example Output
+#     Subscription            Cost             Frequency      
+# ============================================================
+#         Bear               $15.99                1          
+#        Sketch              $50.00                1          
+# ============================================================
+#        Total:              $65.99            (per year)     
+
+
 Frequency: Dict[str, int] = {
     'DAILY': 365,
     'WEEKLY': 52,
