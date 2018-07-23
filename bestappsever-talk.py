@@ -3,7 +3,7 @@ from collections import Counter
 
 import nltk
 import requests
-from bs4 import BeautifulSoup\
+from bs4 import BeautifulSoup
 
 
 # def isApp(word):
