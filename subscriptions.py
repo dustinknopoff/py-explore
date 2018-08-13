@@ -40,7 +40,8 @@ class Subscription:
 class Subscriptions:
     def __init__(self):
         self.subscriptions: List[Subscription] = self.__load()
-
+        self.total = 0
+        
     @staticmethod
     def __load():
         """
@@ -48,10 +49,11 @@ class Subscriptions:
         :return: List of Subscriptions.
         """
         out = []
-        with open('../subscriptions.json', 'r') as f:
+        with open('./subscriptions.json', 'r') as f:
             result = json.loads(f.read())
             for sub in result['subscriptions']:
                 d = Subscription(sub['title'], sub['cost'], sub['frequency'])
+                self.total += d.cost * d.frequency
                 out.append(d)
         return out
 
