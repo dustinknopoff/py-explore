@@ -1,6 +1,6 @@
+import argparse
 import json
 from typing import List, Dict, Any
-import argparse
 
 # Example Output
 #     Subscription            Cost             Frequency      
@@ -41,7 +41,7 @@ class Subscriptions:
     def __init__(self):
         self.subscriptions: List[Subscription] = self.__load()
         self.total = 0
-        
+
     @staticmethod
     def __load():
         """
@@ -49,12 +49,15 @@ class Subscriptions:
         :return: List of Subscriptions.
         """
         out = []
-        with open('./subscriptions.json', 'r') as f:
-            result = json.loads(f.read())
-            for sub in result['subscriptions']:
-                d = Subscription(sub['title'], sub['cost'], sub['frequency'])
-                self.total += d.cost * d.frequency
-                out.append(d)
+        try:
+            with open('./subscriptions.json', 'r') as f:
+                result = json.loads(f.read())
+                for sub in result['subscriptions']:
+                    d = Subscription(sub['title'], sub['cost'], sub['frequency'])
+                    self.total += d.cost * d.frequency
+                    out.append(d)
+        except FileNotFoundError:
+            pass
         return out
 
     def __str__(self):
@@ -110,7 +113,7 @@ class Subscriptions:
         }
         for sub in self.subscriptions:
             result["subscriptions"].append(sub.as_dict())
-        with open('../subscriptions.json', 'w', encoding='utf8') as f:
+        with open('../subscriptions.json', 'w+', encoding='utf8') as f:
             json.dump(result, f, indent=4)
 
 
@@ -136,16 +139,18 @@ if __name__ == '__main__':
         subscriptions.add_subscription(
             title, float(cost), int(Frequency[frequency]))
         print(subscriptions)
+        subscriptions.save()
     elif args.delete:
         title = input("Title: ")
         subscriptions.remove_subscriptions(title)
         print(subscriptions)
+        subscriptions.save()
     elif args.print:
         print(subscriptions)
     else:
         print("Please enter a valid argument.")
     subscriptions.save()
-    
+
 #     Usage:
 # usage: subscriptions.py [-h] [-a] [-d] [-p]
 
