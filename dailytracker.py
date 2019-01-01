@@ -93,7 +93,7 @@ def show_graph(freq, kv):
     plt.legend()
     plt.xticks(range(0, ln), list(reversed(lst)), rotation=45)
     plt.xlabel('Day')
-
+    plt.subplots_adjust(bottom=0.23)
     plt.show()
     should_save = input("Would you like to save this graph?\n1) yes\n2) no\n")
     if should_save is '1':
@@ -103,13 +103,13 @@ def show_graph(freq, kv):
 if __name__ == '__main__':
     print("Welcome! This is a program to help keep track of and visualize things you find important"
           " everyday")
-    yes = False
+    yes = True
     while 1:
         print("Is this your first time?\n1) yes\n2) no")
         is_first = input()
         if int(is_first):
             if int(is_first) == 1:
-                yes = True
+                yes = False
                 set_questions()
             break
         else:
