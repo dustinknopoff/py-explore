@@ -31,15 +31,16 @@ def set_questions():
         f.write("{}")
 
 
-def enter_scores():
+def enter_scores(check):
     """
     For every question in questions.txt, ask for an integer value and add to data.json
     :return: dictionary of questions to list of responses
     """
-    if (datetime.today() - timedelta(1)).strftime("%d%m%y") != datetime.fromtimestamp(
-            path.getmtime('./data.json')).strftime("%d%m%y"):
-        print("Whoops, you tried to enter a value twice in one day!")
-        exit(1)
+    if check:
+        if (datetime.today() - timedelta(1)).strftime("%d%m%y") != datetime.fromtimestamp(
+                path.getmtime('./data.json')).strftime("%d%m%y"):
+            print("Whoops, you tried to enter a value twice in one day!")
+            exit(1)
     print("Please enter your scores for today")
     with open("./data.json", 'r') as f:
         # Define 10 questions within the triple quotes separated by a new line
@@ -102,16 +103,18 @@ def show_graph(freq, kv):
 if __name__ == '__main__':
     print("Welcome! This is a program to help keep track of and visualize things you find important"
           " everyday")
+    yes = False
     while 1:
         print("Is this your first time?\n1) yes\n2) no")
         is_first = input()
         if int(is_first):
             if int(is_first) == 1:
+                yes = True
                 set_questions()
             break
         else:
             print("Please enter 1 or 0")
-    kv = enter_scores()
+    kv = enter_scores(yes)
     while 1:
         print("How would you like to see this data?\n"
               "1) Past 2 Days\n"
